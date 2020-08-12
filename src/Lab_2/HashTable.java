@@ -1,16 +1,21 @@
 package Lab_2;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class HashTable {
     Node[] nodes;
-    int capacity;
+    int size;
     LinkedList<Node>[] collisionTab;
 
-    public HashTable(int capacity) {
-        this.capacity = capacity;
-        nodes = new Node[capacity];
+    public HashTable(int size) {
+        this.size = size;
+        nodes = new Node[size];
+    }
+
+    public HashTable(int size, String[][] stuff) {
+        this.size = size;
+        nodes = new Node[size];
+        fillUpHashTable(stuff);
     }
 
     public void put(String key, String value) {
@@ -20,7 +25,7 @@ public class HashTable {
             nodes[index] = newNode;
         } else {
             if (collisionTab == null) {
-                collisionTab = new LinkedList[capacity];
+                collisionTab = new LinkedList[size];
                 collisionTab[index].add(0,newNode);
                 collisionTab[index].peek();
             } else {
@@ -60,11 +65,13 @@ public class HashTable {
             if((test = hash & 0xf0000000) != 0)
                 hash = ((hash ^ (test >> 24))) & (0xfffffff);
         }
-        return hash % capacity;
+        return hash % size;
     }
 
-
-
+    public void fillUpHashTable(String[][] stuff) {
+        for (int i = 0; i < stuff.length; i++)
+            put(stuff[i][0], stuff[i][1]);
+    }
     class Node{
         private String key;
         private String value;
@@ -79,5 +86,9 @@ public class HashTable {
         public String toString() {
             return "Key '" + key + "' contains value '" + value;
         }
+
     }
 }
+
+
+
