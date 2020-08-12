@@ -4,7 +4,6 @@ import java.nio.charset.Charset;
 import java.util.Random;
 
 public class StringGenerator {
-
     public String generateLetters(int bound) {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
@@ -24,7 +23,6 @@ public class StringGenerator {
         int rightLimit = 122; // letter 'z'
         Random random = new Random();
         int length = random.nextInt(bound);
-
         String generatedString = random.ints(leftLimit, rightLimit + 1)
                 .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
                 .limit(length)
@@ -32,5 +30,4 @@ public class StringGenerator {
                 .toString();
         return generatedString;
     }
-
 }
